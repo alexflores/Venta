@@ -1,6 +1,4 @@
-require 'tarificador'
-require 'tarificador_articulo'
-require 'tarificador_servicio'
+require 'tarificador_factory'
 class Producto
 
    def initialize(tipo_producto, nombre_producto, precio)
@@ -11,15 +9,8 @@ class Producto
    end
  
    def cuanto_por(cantidad)
-     total_por_producto=0
-     if (@tipo == "articulo")
-	  tarificador_articulo = Tarificador.new(Tarificador_Articulo.new)
-	  total_por_producto = tarificador_articulo.cuanto_por(@precio, cantidad)
-	 else
-	    tarificador_servicio = Tarificador.new(Tarificador_Servicio.new)
-	    total_por_producto = tarificador_servicio.cuanto_por(@precio, cantidad)
-	 end
-	  return total_por_producto
+	  tipo_tarificador = Tarificador_Factory.new
+	  return tipo_tarificador.crear_tarificador(@tipo, @precio, cantidad)
    end 
 
 end

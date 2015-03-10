@@ -5,15 +5,8 @@ class Venta
   end
 
   def anadir(producto = Producto.new, cantidad) 
-    if (producto.getTipo == "articulo")
-	  @total = @total + (producto.getPrecio*cantidad);
-	else
-	  if (producto.getTipo == "servicio")
-	    @total = producto.getPrecio*cantidad*0.2;
-	  end
-	end
-
-  end
+    @total = producto.cuanto_por(cantidad) + @total
+	end  
 
   def calcular_total
     return @total;
